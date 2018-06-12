@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    var triviaQuestions = [
+    var myQuestions = [
         {
             question: "What makes time-travel possible in the movie Back to the Future?",
             answers: {
@@ -63,7 +63,7 @@ $(document).ready(function () {
         },
         {
             question: "In Ray Bradburys classic novel, paper bursts into flames at what&#34;Fahrenheit ________&#34; temperature?",
-            answers: {  
+            answers: {
                 a: "451&#186;",
                 b: "215&#186;",
                 c: "100&#186;",
@@ -92,7 +92,7 @@ $(document).ready(function () {
             correctAnswer: "b"
         },
         {
-            question: "Ellen Riplay had to fight off what terrifying creature in the &#34;Alien&#34; moive films?",
+            question: "Ellen Ripley had to fight off what terrifying creature in the &#34;Alien&#34; movie films?",
             answers: {
                 a: "X-men",
                 b: "Tribble",
@@ -102,30 +102,98 @@ $(document).ready(function () {
             correctAnswer: "c"
         },
     ];
-    
-    function goQuiz() {
-        var output = [];
-    
-        triviaQuestions.forEach(
-            (currentQuestion, questionNumber) => {
-    
-                var answers = [];
+    function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
+
+        function showQuestions(questions, quizContainer) {
+            // we'll need a place to store the output and the answer choices
+            var output = [];
+            var answers;
+
+            // for each question...
+            for (var i = 0; i < questions.length; i++) {
+
+                // first reset the list of answers
+                answers = [];
+
+                // for each available answer to this question...
+                for (letter in questions[i].answers) {
+
+                    // ...add an html radio button
+                    answers.push(
+                        '<label>'
+                        + '<input type="radio" name="question' + i + '" value="' + letter + '">'
+                        + letter + ': '
+                        + questions[i].answers[letter]
+                        + '</label>'
+                    );
+                }
+
+                // add this question and its answers to the output
+                output.push(
+                    '<div class="question">' + questions[i].question + '</div>'
+                    + '<div class="answers">' + answers.join('') + '</div>'
+                );
             }
-    
-    )
-    
+
+            // finally combine our output list into one string of html and put it on the page
+            quizContainer.innerHTML = output.join('');
+        }
+        showQuestions(questions, quizContainer);
+
+        function showResults(questions, quizContainer, resultsContainer) {
+
+            // gather answer containers from our quiz
+            var answerContainers = quizContainer.querySelectorAll('.answers');
+
+            // keep track of user's answers
+            var userAnswer = '';
+            var numCorrect = 0;
+
+            // for each question...
+            for (var i = 0; i < questions.length; i++) {
+
+                // find selected answer
+                userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+
+                // if answer is correct
+                if (userAnswer === questions[i].correctAnswer) {
+                    // add to the number of correct answers
+                    numCorrect++;
+
+                    // color the answers green
+                    answerContainers[i].style.color = 'lightgreen';
+                }
+                // if answer is wrong or blank
+                else {
+                    // color the answers red
+                    answerContainers[i].style.color = 'red';
+                }
+            }
+
+            // show number of correct answers out of total
+            resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+        }
+        // on submit, show results
+        submitButton.onclick = function () {
+            showResults(questions, quizContainer, resultsContainer);
+        }
+
     }
-    
-    function seeResults() {
-    
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    });
-    
+
+
+    var quizContainer = document.getElementById('quiz');
+    var resultsContainer = document.getElementById('results');
+    var submitButton = document.getElementById('submit');
+
+    generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+
+
+
+
+
+
+
+
+
+
+});
