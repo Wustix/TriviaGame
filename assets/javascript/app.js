@@ -22,7 +22,7 @@ $(document).ready(function () {
             correctAnswer: "c"
         },
         {
-            question: "In Star Wars lore, what powers a lightsaber and gives it a distintive color?",
+            question: "In Star Wars lore, what powers a lightsaber and gives it it's distintive color?",
             answers: {
                 a: "D Battery",
                 b: "Bug Zapper",
@@ -102,23 +102,23 @@ $(document).ready(function () {
             correctAnswer: "c"
         },
     ];
+
+
+
     function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
 
         function showQuestions(questions, quizContainer) {
-            // we'll need a place to store the output and the answer choices
+
             var output = [];
             var answers;
 
-            // for each question...
             for (var i = 0; i < questions.length; i++) {
 
-                // first reset the list of answers
                 answers = [];
 
-                // for each available answer to this question...
                 for (letter in questions[i].answers) {
 
-                    // ...add an html radio button
+                    //radio buttons
                     answers.push(
                         '<label>'
                         + '<input type="radio" name="question' + i + '" value="' + letter + '">'
@@ -128,55 +128,44 @@ $(document).ready(function () {
                     );
                 }
 
-                // add this question and its answers to the output
                 output.push(
                     '<div class="question">' + questions[i].question + '</div>'
                     + '<div class="answers">' + answers.join('') + '</div>'
                 );
             }
 
-            // finally combine our output list into one string of html and put it on the page
             quizContainer.innerHTML = output.join('');
         }
         showQuestions(questions, quizContainer);
 
         function showResults(questions, quizContainer, resultsContainer) {
 
-            // gather answer containers from our quiz
-            var answerContainers = quizContainer.querySelectorAll('.answers');
 
-            // keep track of user's answers
+            var answerContainers = quizContainer.querySelectorAll('.answers');
             var userAnswer = '';
             var numCorrect = 0;
 
-            // for each question...
+
             for (var i = 0; i < questions.length; i++) {
 
-                // find selected answer
+
                 userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
 
-                // if answer is correct
-                if (userAnswer === questions[i].correctAnswer) {
-                    // add to the number of correct answers
-                    numCorrect++;
 
-                    // color the answers green
-                    answerContainers[i].style.color = 'lightgreen';
+                if (userAnswer === questions[i].correctAnswer) {
+
+                    numCorrect++;
                 }
-                // if answer is wrong or blank
-                else {
-                    // color the answers red
-                    answerContainers[i].style.color = 'red';
-                }
+
             }
 
-            // show number of correct answers out of total
             resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
         }
-        // on submit, show results
+
         submitButton.onclick = function () {
             showResults(questions, quizContainer, resultsContainer);
         }
+
 
     }
 
@@ -186,14 +175,39 @@ $(document).ready(function () {
     var submitButton = document.getElementById('submit');
 
     generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
-
-
-
-
-
-
-
-
-
+    decrement();
 
 });
+
+function startTrivia() {
+
+};
+
+var number = 30;
+var intervalId;
+
+
+
+function run() {
+    clearInterval(intervalId);
+    intervalId = setInterval(decrement, 1000);
+}
+
+function decrement() {
+
+    number--;
+
+    $("#timer").html("<h2>" + number + "</h2>");
+
+    if (number === 0) {
+
+        stop();
+
+    }
+}
+function stop() {
+
+    clearInterval(intervalId);
+}
+run();
+
