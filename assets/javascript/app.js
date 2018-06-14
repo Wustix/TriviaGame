@@ -9,7 +9,7 @@ $(document).ready(function () {
                 c: "Phlem Capacitor",
                 d: "Full Capacitor"
             },
-            correctAnswer: "c"
+            correctAnswer: "b"
         },
         {
             question: "Who is the blonde hero who will &#34;save everyone of us&#34;",
@@ -107,14 +107,14 @@ $(document).ready(function () {
         startScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Quiz</a></p>";
         $("#quiz").html(startScreen);
     }
-
-    $("body").on("click", ".start-button", function(event){
-        generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
-    
-    }); 
-    
-   
     initializeScreen();
+    $("body").on("click", ".start-button", function (event) {
+        generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+
+    });
+
+
+
     function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
 
         function showQuestions(questions, quizContainer) {
@@ -147,6 +147,7 @@ $(document).ready(function () {
             quizContainer.innerHTML = output.join('');
         }
         showQuestions(questions, quizContainer);
+        decrement();
 
         function showResults(questions, quizContainer, resultsContainer) {
 
@@ -179,10 +180,17 @@ $(document).ready(function () {
     var resultsContainer = document.getElementById('results');
     var submitButton = document.getElementById('submit');
 
-    
-    decrement();
+
+
 
 });
+
+
+
+function finalScreen() {
+    resultScreen = "<p class='text-center'>" + + "</p>"
+    $("#quiz").html(resultScreen);
+}
 
 var number = 30;
 var intervalId;
