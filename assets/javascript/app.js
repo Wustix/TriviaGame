@@ -103,8 +103,18 @@ $(document).ready(function () {
         },
     ];
 
+    function initializeScreen() {
+        startScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Quiz</a></p>";
+        $("#quiz").html(startScreen);
+    }
 
-
+    $("body").on("click", ".start-button", function(event){
+        generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+    
+    }); 
+    
+   
+    initializeScreen();
     function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
 
         function showQuestions(questions, quizContainer) {
@@ -140,17 +150,13 @@ $(document).ready(function () {
 
         function showResults(questions, quizContainer, resultsContainer) {
 
-
             var answerContainers = quizContainer.querySelectorAll('.answers');
             var userAnswer = '';
             var numCorrect = 0;
 
-
             for (var i = 0; i < questions.length; i++) {
 
-
                 userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
-
 
                 if (userAnswer === questions[i].correctAnswer) {
 
@@ -169,24 +175,17 @@ $(document).ready(function () {
 
     }
 
-
     var quizContainer = document.getElementById('quiz');
     var resultsContainer = document.getElementById('results');
     var submitButton = document.getElementById('submit');
 
-    generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+    
     decrement();
 
 });
 
-function startTrivia() {
-
-};
-
 var number = 30;
 var intervalId;
-
-
 
 function run() {
     clearInterval(intervalId);
@@ -205,6 +204,7 @@ function decrement() {
 
     }
 }
+
 function stop() {
 
     clearInterval(intervalId);
