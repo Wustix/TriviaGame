@@ -107,10 +107,13 @@ $(document).ready(function () {
         startScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Quiz</a></p>";
         $("#quiz").html(startScreen);
     }
+    
     initializeScreen();
+
+
     $("body").on("click", ".start-button", function (event) {
         generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
-
+        timerRun();
     });
 
 
@@ -147,7 +150,7 @@ $(document).ready(function () {
             quizContainer.innerHTML = output.join('');
         }
         showQuestions(questions, quizContainer);
-        decrement();
+
 
         function showResults(questions, quizContainer, resultsContainer) {
 
@@ -195,27 +198,28 @@ function finalScreen() {
 var number = 30;
 var intervalId;
 
-function run() {
-    clearInterval(intervalId);
-    intervalId = setInterval(decrement, 1000);
-}
-
-function decrement() {
-
-    number--;
-
-    $("#timer").html("<h2>" + number + "</h2>");
-
-    if (number === 0) {
-
-        stop();
-
+function timerRun() {
+    function run() {
+        clearInterval(intervalId);
+        intervalId = setInterval(decrement, 1000);
     }
-}
 
-function stop() {
+    function decrement() {
 
-    clearInterval(intervalId);
-}
-run();
+        number--;
 
+        $("#timer").html("<h2>" + number + "</h2>");
+
+        if (number === 0) {
+
+            stop();
+
+        }
+    }
+
+    function stop() {
+
+        clearInterval(intervalId);
+    }
+    run();
+};

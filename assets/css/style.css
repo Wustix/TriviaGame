@@ -1,14 +1,14 @@
 /*--Jumbotron Container--*/
 
 .jumbotron {
-    height: 900px;
-    max-width: 1200px;
+    height: 920px;
+    max-width: 1300px;
     margin: auto;
-    margin-top: 30px;
+    margin-top: 10px;
 }
 #scifi-style {
     text-align: center;
-    font-size: 90px;
+    font-size: 60px;
 }
 body {
     background-image: url(../images/scifi-background.jpg);
@@ -17,7 +17,7 @@ body {
 }
 #quiz {
     font-size: 24px;
-    line-height: 120%;
+    line-height: 135%;
 }
 #timer {
     text-align: center;
