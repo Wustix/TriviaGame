@@ -106,6 +106,7 @@ $(document).ready(function () {
     function initializeScreen() {
         startScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Quiz</a></p>";
         $("#quiz").html(startScreen);
+        $("#submit").hide();
     }
 
     initializeScreen();
@@ -114,6 +115,7 @@ $(document).ready(function () {
     $("body").on("click", ".start-button", function (event) {
         generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
         timerRun();
+        $("#submit").show();
     });
 
 
@@ -177,6 +179,7 @@ $(document).ready(function () {
             }
 
             resultScreen();
+            $("#submit").hide();
 
         }
 
