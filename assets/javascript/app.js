@@ -171,15 +171,17 @@ $(document).ready(function () {
 
             }
 
-            resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+            resultsContainer.innerHTML = 'You got ' + numCorrect + ' out of ' + questions.length + ' correct answers!';
 
             function resultScreen() {
                 resultsScreen = resultsContainer
                 $("#quiz").html(resultsScreen);
+                $("#results").addClass("blue")
             }
 
             resultScreen();
             $("#submit").hide();
+
 
         }
 
@@ -203,7 +205,7 @@ $(document).ready(function () {
 });
 
 function timerRun() {
-    var number = 30;
+    var number = 40;
     var intervalId;
 
     function run() {

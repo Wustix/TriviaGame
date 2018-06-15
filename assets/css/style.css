@@ -1,7 +1,7 @@
 /*--Jumbotron Container--*/
 
 .jumbotron {
-    height: 920px;
+    height: 930px;
     max-width: 1300px;
     margin: auto;
     margin-top: 10px;
@@ -9,6 +9,7 @@
 #scifi-style {
     text-align: center;
     font-size: 60px;
+    padding-top: 0px;
 }
 body {
     background-image: url(../images/scifi-background.jpg);
@@ -24,6 +25,21 @@ body {
     color: red;
     font-size: 30px;
 }
+#results {
+    color: blue;
+    text-align: center;
+    font-size: 44px;
+    margin-top: 140px;
+}
+.start-button {
+    width: 50%;
+    margin: auto;
+    margin-top: 240px;
+}
+.answers {
+    letter-spacing: 1px;
+}
+
 
 
 
