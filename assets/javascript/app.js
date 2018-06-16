@@ -219,7 +219,7 @@ function timerRun() {
 
         $("#timer").html("<h2>" + number + "</h2>");
 
-        if (number === 0 ||  {
+        if (number === 0)  {
 
             stop();
 
