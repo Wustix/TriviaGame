@@ -104,7 +104,7 @@ $(document).ready(function () {
     ];
 
     function initializeScreen() {
-        startScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Start Quiz</a></p>";
+        startScreen = "<p class='text-center main-button-container'><a class='btn btn-primary btn-lg btn-block start-button' href='#' role='button'>Click Button to Start Quiz</a></p>";
         $("#quiz").html(startScreen);
         $("#submit").hide();
     }
@@ -113,14 +113,12 @@ $(document).ready(function () {
 
 
     $("body").on("click", ".start-button", function (event) {
-        generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+        generateQuiz(myQuestions, quizContainer, resultsContainer);
         timerRun();
         $("#submit").show();
     });
 
-
-
-    function generateQuiz(questions, quizContainer, resultsContainer, submitButton) {
+    function generateQuiz(questions, quizContainer, resultsContainer) {
 
         function showQuestions(questions, quizContainer) {
 
@@ -187,6 +185,7 @@ $(document).ready(function () {
 
         $("#submit").on("click", function () {
             showResults(questions, quizContainer, resultsContainer);
+            $("#timer").hide();
         })
 
 
@@ -197,7 +196,7 @@ $(document).ready(function () {
 
     var quizContainer = document.getElementById('quiz');
     var resultsContainer = document.getElementById('results');
-    var submitButton = document.getElementById('submit');
+
 
 
 
@@ -205,7 +204,7 @@ $(document).ready(function () {
 });
 
 function timerRun() {
-    var number = 40;
+    var number = 60;
     var intervalId;
 
     function run() {
@@ -219,13 +218,14 @@ function timerRun() {
 
         $("#timer").html("<h2>" + number + "</h2>");
 
-        if (number === 0)  {
-
+        if (number === 0) {
             stop();
-
+            
         }
+        
+        
     }
-
+    
     function stop() {
 
         clearInterval(intervalId);
@@ -234,3 +234,5 @@ function timerRun() {
 
     $("#submit").on("click", stop);
 };
+
+//Did not get code written to go to results screen when timer hits 0.

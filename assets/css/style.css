@@ -39,7 +39,11 @@ body {
 .answers {
     letter-spacing: 1px;
 }
-
+button {
+    background-color: green;
+    font-size: 18px;
+    color: white;    
+}
 
 
 
